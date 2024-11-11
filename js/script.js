@@ -2,6 +2,7 @@
 function createNewCard(container, title, content, className) {
 	let newCard = document.createElement("li");
 	newCard.classList.add(className); // Přiřadí třídu pro odlišení formuláře
+	newCard.classList.add("animate__animated", "animate__flipInX");
 
 	if (className === "datum") {
 		// Pro druhý formulář pouze <p> obsahující title a content spojeno mezerou
@@ -47,6 +48,7 @@ form2.addEventListener("submit", (event) => {
 	if (!inputTitle2.value.trim() || !inputContent2.value.trim()) return;
 
 	// Vytvoření nové karty pro druhý formulář
+
 	createNewCard(cardContainer, inputTitle2.value, inputContent2.value, "datum");
 
 	// Vymazání inputů
