@@ -1,7 +1,12 @@
-const form = document.querySelector("form");
+const form = document.querySelector("#day");
 const inputTitle = form.querySelector("input[name=title]");
 const inputContent = form.querySelector("input[name=content]");
 const cardContainer = document.querySelector(".cards ul");
+
+// const formDatum = document.querySelector("#datum");
+// const jmenoDne = form.querySelector("input[name=jmenodne]");
+// const datum = form.querySelector("input[name=datum]");
+// const cardContainerDatum = document.querySelector(".cards ul");
 
 function createNewCard(container, title, text) {
 	let newCard = document.createElement("li");
@@ -12,16 +17,12 @@ function createNewCard(container, title, text) {
 	`;
 
 	container.appendChild(newCard);
-	newCard.classList.add("animate__animated", "animate__flipInX");
+	newCard.classList.add("den");
 }
 
 form.addEventListener("submit", (event) => {
-	// pointa formularu je odoslat jeho udaje na dalsie spracovanie
-	// cize podobne ako link, za normalnych okolnosti po odoslani formularu
-	// prehliadac skoci na inu web adresu... ak tomu chces zabranit:
 	event.preventDefault();
 
-	// ak nemame title alebo content, koncime
 	if (!inputTitle.value.trim() || !inputContent.value.trim()) return;
 
 	// vytvor novy card element [ funkcia je v utilities.json ]
