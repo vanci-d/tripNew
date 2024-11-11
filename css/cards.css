@@ -1,0 +1,12 @@
+.cards {
+	color: white;
+
+
+
+}
+.cards li{
+
+		border: 0.1rem solid black;
+		background-color: #b68d40;
+		margin: 0% 10% 5% 10%;
+}
