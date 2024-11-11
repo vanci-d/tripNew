@@ -1,12 +1,24 @@
-.cards {
-	color: white;
+
+
+
+
+
+
+
+.cards ul{
+
+	list-style: none;
+	padding-left: 0%;
+
 
 
 
 }
 .cards li{
 
-		border: 0.1rem solid black;
-		background-color: #b68d40;
+		border: 0.3rem solid #b68d40;
+		border-radius: 0.75rem;
+		background-color: #d6ad60;
 		margin: 0% 10% 5% 10%;
+		padding: 1%;
 }
