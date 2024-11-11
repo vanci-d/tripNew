@@ -17,11 +17,25 @@
 
 
 }
-.cards li{
+.den{
 
 		border: 0.3rem solid #b68d40;
 		border-radius: 0.75rem;
 		background-color: #d6ad60;
-		margin: 0% 10% 1% 10%;
+		margin: 0% 15% 1% 15%;
 		padding: 1%;
+}
+.datum{
+
+		border: 0.3rem solid #b68d40;
+			border-radius: 0.75rem;
+			background-color: #d6ad60;
+			margin: 0% 30% 1% 30%;
+			padding: 1%;
+			text-align: center;
+			color: rgb(48, 3, 3);
+			font-weight: bold;
+			font-family: monospace;
+
+		}
 }

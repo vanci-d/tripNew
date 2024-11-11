@@ -12,6 +12,7 @@ function createNewCard(container, title, text) {
 	`;
 
 	container.appendChild(newCard);
+	newCard.classList.add("animate__animated", "animate__flipInX");
 }
 
 form.addEventListener("submit", (event) => {
