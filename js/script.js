@@ -1,37 +1,55 @@
-const form = document.querySelector("#day");
-const inputTitle = form.querySelector("input[name=title]");
-const inputContent = form.querySelector("input[name=content]");
-const cardContainer = document.querySelector(".cards ul");
-
-// const formDatum = document.querySelector("#datum");
-// const jmenoDne = form.querySelector("input[name=jmenodne]");
-// const datum = form.querySelector("input[name=datum]");
-// const cardContainerDatum = document.querySelector(".cards ul");
-
-function createNewCard(container, title, text) {
+// Funkce pro vytvoření nové karty
+function createNewCard(container, title, content, className) {
 	let newCard = document.createElement("li");
+	newCard.classList.add(className); // Přiřadí třídu pro odlišení formuláře
 
-	newCard.innerHTML = `
-		<h3>${title}</h3>
-		<p>${text}</p>
-	`;
+	if (className === "datum") {
+		// Pro druhý formulář pouze <p> obsahující title a content spojeno mezerou
+		newCard.innerHTML = `<p>${title} ${content}</p>`;
+	} else {
+		// Pro první formulář <h3> pro title a <p> pro content
+		newCard.innerHTML = `
+                    <h3>${title}</h3>
+                    <p>${content}</p>
+                `;
+	}
 
 	container.appendChild(newCard);
-	newCard.classList.add("den");
 }
 
-form.addEventListener("submit", (event) => {
+// První formulář
+const form1 = document.querySelector("#day");
+const inputTitle1 = form1.querySelector("input[name=title]");
+const inputContent1 = form1.querySelector("input[name=content]");
+const cardContainer = document.querySelector("#allCards"); // Všechny karty v jednom seznamu
+
+form1.addEventListener("submit", (event) => {
 	event.preventDefault();
 
-	if (!inputTitle.value.trim() || !inputContent.value.trim()) return;
+	if (!inputTitle1.value.trim() || !inputContent1.value.trim()) return;
 
-	// vytvor novy card element [ funkcia je v utilities.json ]
-	createNewCard(cardContainer, inputTitle.value, inputContent.value);
+	// Vytvoření nové karty pro první formulář
+	createNewCard(cardContainer, inputTitle1.value, inputContent1.value, "den");
 
-	// premaz inputy
-	inputTitle.value = "";
-	inputContent.value = "";
+	// Vymazání inputů
+	inputTitle1.value = "";
+	inputContent1.value = "";
+});
 
-	// nastav sa do title inputu
-	inputTitle.focus();
+// Druhý formulář
+const form2 = document.querySelector("#date");
+const inputTitle2 = form2.querySelector("input[name=title2]");
+const inputContent2 = form2.querySelector("input[name=content2]");
+
+form2.addEventListener("submit", (event) => {
+	event.preventDefault();
+
+	if (!inputTitle2.value.trim() || !inputContent2.value.trim()) return;
+
+	// Vytvoření nové karty pro druhý formulář
+	createNewCard(cardContainer, inputTitle2.value, inputContent2.value, "datum");
+
+	// Vymazání inputů
+	inputTitle2.value = "";
+	inputContent2.value = "";
 });
