@@ -55,3 +55,9 @@ form2.addEventListener("submit", (event) => {
 	inputTitle2.value = "";
 	inputContent2.value = "";
 });
+
+// function deleteItem(button) {
+// 	// Získá rodičovský <li> prvek tlačítka a odstraní ho
+// 	const item = button.parentElement;
+// 	item.remove();
+// }

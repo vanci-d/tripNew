@@ -14,9 +14,13 @@
 	padding-left: 0%;
 
 
-
-
 }
+
+.cards li{
+
+	position: relative;
+}
+
 .den{
 
 		border: 0.3rem solid #b68d40;
@@ -38,3 +42,37 @@
 			font-family: monospace;
 
 		}
+
+
+	.btn
+
+	{
+
+
+	position: absolute;
+	right: 1%;
+	top: 0;
+	cursor: pointer;
+	font-size: smaller;
+
+
+	}
+
+
+
+
+	.delete-btn:hover {
+		color: rgb(73, 0, 0);
+  	opacity: 0.8;
+
+}
+
+
+
+
+
+.edit-btn:hover {
+	color: rgb(0, 73, 19);
+	opacity: 0.8;
+
+}
