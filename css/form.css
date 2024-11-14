@@ -1,11 +1,13 @@
 input,
 textarea,
 select {
-	border: 2px solid #007bff;
+
+
+	border: 0.3em solid #b68d40;
 	/* Nastavení barvy a tloušťky rámečku */
-	border-radius: 5px;
+	border-radius: 0.5em;
 	/* Zaoblení rohů */
-	padding: 10px;
+	padding: 0.2em;
 	/* Vnitřní odsazení */
 	font-size: 16px;
 	/* Velikost písma */
@@ -15,7 +17,9 @@ select {
 input:hover,
 textarea:hover,
 select:hover {
-	border-color: #0056b3;
+
+
+	border-color: #f4ebd0;
 	/* Změna barvy rámečku při najetí */
 }
 
@@ -25,16 +29,15 @@ textarea:focus,
 select:focus {
 	outline: none;
 	/* Skryje výchozí zvýraznění rámečku */
-	border-color: #28a745;
+	border-color: #122620;
 	/* Nastavení barvy při kliknutí do prvku */
-	box-shadow: 0 0 5px rgba(40, 167, 69, 0.5);
-	/* Lehké světlo kolem rámečku */
+
 }
 
 /* Styl pro tlačítka formuláře */
 button {
-	background-color: #007bff;
-	color: white;
+	background-color: #f4ebd0;
+	color: #122620;
 	border: none;
 	padding: 10px 20px;
 	border-radius: 5px;
@@ -42,6 +45,6 @@ button {
 }
 
 button:hover {
-	background-color: #0056b3;
+	background-color: #b68d40;
 	/* Změna barvy tlačítka při najetí myší */
 }
