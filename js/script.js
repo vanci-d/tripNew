@@ -6,12 +6,15 @@ function createNewCard(container, title, content, className) {
 
 	if (className === "datum") {
 		// Pro druhý formulář pouze <p> obsahující title a content spojeno mezerou
-		newCard.innerHTML = `<p>${title} ${content}</p>`;
+		newCard.innerHTML = `<p>${title} ${content}</p><p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>
+
+		`;
 	} else {
 		// Pro první formulář <h3> pro title a <p> pro content
 		newCard.innerHTML = `
                     <h3>${title}</h3>
                     <p>${content}</p>
+										<p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>
                 `;
 	}
 
@@ -55,9 +58,3 @@ form2.addEventListener("submit", (event) => {
 	inputTitle2.value = "";
 	inputContent2.value = "";
 });
-
-// function deleteItem(button) {
-// 	// Získá rodičovský <li> prvek tlačítka a odstraní ho
-// 	const item = button.parentElement;
-// 	item.remove();
-// }
