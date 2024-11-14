@@ -7,6 +7,7 @@
 	<title>TRIP MAKER</title>
 	<link rel="stylesheet" href="./css/style.css">
 	<link rel="stylesheet" href="./css/cards.css">
+	<link rel="stylesheet" href="./css/form.css">
 	<script defer src="./js/script.js"></script>
 	<script defer src="./js/other.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
@@ -17,19 +18,22 @@
 
 	<div class="app">
 
-		<h2>Vytvoř si výlet</h2>
-
-		<form id="day">
-			<input type="text" name="title" placeholder="new title">
-			<input type="text" name="content" placeholder="new text">
-			<button type="submit" name="submitDay">add new thing</button>
-		</form>
+		<h2>Zadej den</h2>
 		<form id="date">
 			<input type="text" name="title2" placeholder="Co je to za den">
 			<input type="text" name="content2" placeholder="DD.MM.RRRR">
-			<button type="submit" name="submitDatum">add new thing</button>
+			<button type="submit" name="submitDatum">Zadej</button>
 
 		</form>
+
+		<h2>Zadej plán</h2>
+
+		<form id="day">
+			<input type="text" name="title" placeholder="Název">
+			<input type="text" name="content" placeholder="Popis">
+			<button type="submit" name="submitDay">Zadej</button>
+		</form>
+
 
 	</div>
 

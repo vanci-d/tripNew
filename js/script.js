@@ -20,11 +20,20 @@ function createNewCard(container, title, content, className) {
 
 	container.appendChild(newCard);
 
+	//delete btn
 	const deletebtns = document.querySelectorAll(".delete-btn");
 	deletebtns.forEach((deletebtn) => {
 		deletebtn.addEventListener("click", (event) => {
 			const li = event.target.closest("li");
 			li.remove();
+		});
+	});
+
+	//edit btn
+	const edits = document.querySelectorAll(".edit-btn");
+	edits.forEach((edit) => {
+		edit.addEventListener("click", (event) => {
+			alert("Zatim to nefaka");
 		});
 	});
 }
