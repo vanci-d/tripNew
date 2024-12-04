@@ -29,5 +29,9 @@ font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
 	padding: 1em;
 	margin: 1% 10% 1% 10%;
 	text-align: center;
+	display: flex;
+	align-items: center;
+
+	gap: 20px;
 
 }
