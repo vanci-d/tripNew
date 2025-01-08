@@ -20,13 +20,35 @@ function createNewCard(container, title, content, className) {
 	container.appendChild(newCard);
 
 	//delete btn
+
 	const deletebtns = document.querySelectorAll(".delete-btn");
+
 	deletebtns.forEach((deletebtn) => {
 		deletebtn.addEventListener("click", (event) => {
 			const li = event.target.closest("li");
-			li.remove();
+
+			// Zobrazí se potvrzovací dialog
+			const isConfirmed = confirm("Jseš si jistej kámo?");
+
+			if (isConfirmed) {
+				// Pokud uživatel potvrdí, prvek se odstraní
+				li.remove();
+			} else {
+				// Pokud uživatel zruší, nic se nestane
+				console.log("Smazání bylo zrušeno.");
+			}
 		});
 	});
+
+	//edit btn bez zobrazovaciho dialogu
+
+	// const deletebtns = document.querySelectorAll(".delete-btn");
+	// deletebtns.forEach((deletebtn) => {
+	// 	deletebtn.addEventListener("click", (event) => {
+	// 		const li = event.target.closest("li");
+	// 		li.remove();
+	// 	});
+	// });
 
 	//edit btn
 	const edits = document.querySelectorAll(".edit-btn");
