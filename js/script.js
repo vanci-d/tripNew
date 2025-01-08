@@ -11,8 +11,7 @@ function createNewCard(container, title, content, className) {
 		`;
 	} else {
 		// Pro první formulář <h3> pro title a <p> pro content
-		newCard.innerHTML = `
-                    <h3>${title}</h3>
+		newCard.innerHTML = `<h3>${title}</h3>
                     <p>${content}</p>
 										<p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>
                 `;
