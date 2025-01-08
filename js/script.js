@@ -1,98 +1,144 @@
 // Funkce pro vytvoření nové karty
 function createNewCard(container, title, content, className) {
 	let newCard = document.createElement("li");
-	newCard.classList.add(className); // Přiřadí třídu pro odlišení formuláře
-	newCard.classList.add("animate__animated", "animate__flipInX");
+	newCard.classList.add(className, "animate__animated", "animate__flipInX");
 
+	// Přidání obsahu na základě typu karty
 	if (className === "datum") {
-		// Pro druhý formulář pouze <p> obsahující title a content spojeno mezerou
-		newCard.innerHTML = `<p>${title} ${content}</p><p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>
-
-		`;
+		const paragraph = document.createElement("p");
+		paragraph.textContent = `${title} ${content}`;
+		newCard.appendChild(paragraph);
 	} else {
-		// Pro první formulář <h3> pro title a <p> pro content
-		newCard.innerHTML = `<h3>${title}</h3>
-                    <p>${content}</p>
-										<p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>
-                `;
+		const h3 = document.createElement("h3");
+		h3.textContent = title;
+		const pContent = document.createElement("p");
+		pContent.textContent = content;
+		newCard.appendChild(h3);
+		newCard.appendChild(pContent);
 	}
 
+	const btnContainer = document.createElement("p");
+	btnContainer.classList.add("btn");
+
+	// Tlačítka pro editaci a smazání
+	const editBtn = document.createElement("span");
+	editBtn.classList.add("edit-btn");
+	editBtn.textContent = "Upravit";
+	const deleteBtn = document.createElement("span");
+	deleteBtn.classList.add("delete-btn");
+	deleteBtn.textContent = "Smazat";
+
+	btnContainer.appendChild(editBtn);
+	btnContainer.appendChild(document.createTextNode(" | "));
+	btnContainer.appendChild(deleteBtn);
+	newCard.appendChild(btnContainer);
+
+	// Připojí novou kartu do kontejneru
 	container.appendChild(newCard);
 
-	//delete btn
+	// Připojení posluchačů pro editaci a mazání
+	attachListeners(newCard);
+}
 
-	const deletebtns = document.querySelectorAll(".delete-btn");
+// Funkce pro připojení posluchačů událostí pro editaci a mazání
+function attachListeners(card) {
+	const deletebtn = card.querySelector(".delete-btn");
+	const editbtn = card.querySelector(".edit-btn");
 
-	deletebtns.forEach((deletebtn) => {
-		deletebtn.addEventListener("click", (event) => {
-			const li = event.target.closest("li");
-
-			// Zobrazí se potvrzovací dialog
-			const isConfirmed = confirm("Jseš si jistej kámo?");
-
-			if (isConfirmed) {
-				// Pokud uživatel potvrdí, prvek se odstraní
-				li.remove();
-			} else {
-				// Pokud uživatel zruší, nic se nestane
-				console.log("Smazání bylo zrušeno.");
-			}
-		});
+	// Mazání položky
+	deletebtn.addEventListener("click", () => {
+		const isConfirmed = confirm("Jseš si jistej kámo?");
+		if (isConfirmed) card.remove();
 	});
 
-	//edit btn bez zobrazovaciho dialogu
+	// Editace položky
+	editbtn.addEventListener("click", () => {
+		const h3 = card.querySelector("h3");
+		const pContent = card.querySelector("p");
 
-	// const deletebtns = document.querySelectorAll(".delete-btn");
-	// deletebtns.forEach((deletebtn) => {
-	// 	deletebtn.addEventListener("click", (event) => {
-	// 		const li = event.target.closest("li");
-	// 		li.remove();
-	// 	});
-	// });
+		// Pokud je card typu "datum" (tedy nemá <h3>), editujeme pouze <p>
+		if (h3) {
+			// Vytvoření vstupního pole pro titul (pro "day")
+			const titleInput = document.createElement("input");
+			titleInput.type = "text";
+			titleInput.value = h3.textContent.trim();
 
-	//edit btn
-	const edits = document.querySelectorAll(".edit-btn");
-	edits.forEach((edit) => {
-		edit.addEventListener("click", (event) => {
-			alert("Zatim to nefaka");
-		});
+			// Vytvoření vstupního pole pro obsah
+			const contentInput = document.createElement("input");
+			contentInput.type = "text";
+			contentInput.value = pContent.textContent.trim();
+
+			// Nahradí obsah karty vstupními poli
+			card.innerHTML = "";
+			card.appendChild(titleInput);
+			card.appendChild(contentInput);
+			titleInput.focus();
+
+			// Uložení změn při stisknutí Enter
+			contentInput.addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					const newTitle = titleInput.value;
+					const newContent = contentInput.value;
+
+					// Aktualizace karty s novým titulkem a obsahem
+					card.innerHTML = `<h3>${newTitle}</h3><p>${newContent}</p><p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>`;
+					attachListeners(card); // Znovu připojí posluchače
+				}
+			});
+		} else {
+			// Vytvoření vstupního pole pro obsah (pro "datum")
+			const contentInput = document.createElement("input");
+			contentInput.type = "text";
+			contentInput.value = pContent.textContent.trim();
+
+			// Nahradí obsah karty vstupním polem
+			card.innerHTML = "";
+			card.appendChild(contentInput);
+			contentInput.focus();
+
+			// Uložení změn při stisknutí Enter
+			contentInput.addEventListener("keydown", (e) => {
+				if (e.key === "Enter") {
+					const newContent = contentInput.value;
+
+					// Aktualizace karty s novým obsahem
+					card.innerHTML = `<p>${newContent}</p><p class="btn"><span class="edit-btn">Upravit</span> | <span class="delete-btn">Smazat</span></p>`;
+					attachListeners(card); // Znovu připojí posluchače
+				}
+			});
+		}
 	});
+}
+
+// Funkce pro zpracování formuláře
+function handleFormSubmit(event, form, cardContainer, className) {
+	event.preventDefault();
+	const inputTitle = form.querySelector(
+		"input[name=title], input[name=title2]"
+	);
+	const inputContent = form.querySelector(
+		"input[name=content], input[name=content2]"
+	);
+
+	if (!inputTitle.value.trim() || !inputContent.value.trim()) return;
+
+	// Vytvoření nové karty
+	createNewCard(cardContainer, inputTitle.value, inputContent.value, className);
+
+	// Vymazání inputů
+	inputTitle.value = "";
+	inputContent.value = "";
 }
 
 // První formulář
 const form1 = document.querySelector("#day");
-const inputTitle1 = form1.querySelector("input[name=title]");
-const inputContent1 = form1.querySelector("input[name=content]");
 const cardContainer = document.querySelector("#allCards"); // Všechny karty v jednom seznamu
-
-form1.addEventListener("submit", (event) => {
-	event.preventDefault();
-
-	if (!inputTitle1.value.trim() || !inputContent1.value.trim()) return;
-
-	// Vytvoření nové karty pro první formulář
-	createNewCard(cardContainer, inputTitle1.value, inputContent1.value, "den");
-
-	// Vymazání inputů
-	inputTitle1.value = "";
-	inputContent1.value = "";
-});
+form1.addEventListener("submit", (event) =>
+	handleFormSubmit(event, form1, cardContainer, "den")
+);
 
 // Druhý formulář
 const form2 = document.querySelector("#date");
-const inputTitle2 = form2.querySelector("input[name=title2]");
-const inputContent2 = form2.querySelector("input[name=content2]");
-
-form2.addEventListener("submit", (event) => {
-	event.preventDefault();
-
-	if (!inputTitle2.value.trim() || !inputContent2.value.trim()) return;
-
-	// Vytvoření nové karty pro druhý formulář
-
-	createNewCard(cardContainer, inputTitle2.value, inputContent2.value, "datum");
-
-	// Vymazání inputů
-	inputTitle2.value = "";
-	inputContent2.value = "";
-});
+form2.addEventListener("submit", (event) =>
+	handleFormSubmit(event, form2, cardContainer, "datum")
+);
